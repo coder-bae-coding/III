@@ -1,0 +1,33 @@
+<!-- src/app/dashboard/dashboard.component.html -->
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Insurance Mock Test Portal</h1>
+    <p>Select a subject below to start your practice test.</p>
+  </header>
+
+  <main class="subjects-grid">
+    <!-- Card for IC 11 -->
+    <div class="subject-card">
+      <div class="card-icon book-icon"></div>
+      <h3>IC 11 - Principles of Insurance</h3>
+      <p>Master the fundamental concepts and principles that govern the insurance industry.</p>
+      <button class="start-btn" (click)="navigateTo('ic11')">Start Mock Test</button>
+    </div>
+
+    <!-- Card for IC 02 (Example) -->
+    <div class="subject-card disabled">
+      <div class="card-icon shield-icon"></div>
+      <h3>IC 02 - Practices of Life Insurance</h3>
+      <p>Explore the practices, regulations, and products within the life insurance sector.</p>
+      <button class="start-btn" (click)="navigateTo('ic02')" disabled>Coming Soon</button>
+    </div>
+
+    <!-- Card for IC 14 (Example) -->
+    <div class="subject-card disabled">
+      <div class="card-icon chart-icon"></div>
+      <h3>IC 14 - Regulation of Insurance Business</h3>
+      <p>Understand the legal framework and regulatory compliance in the insurance business.</p>
+      <button class="start-btn" (click)="navigateTo('ic14')" disabled>Coming Soon</button>
+    </div>
+  </main>
+</div>

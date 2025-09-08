@@ -1,0 +1,129 @@
+/* src/app/dashboard/dashboard.component.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  font-family: 'Poppins', sans-serif;
+  padding: 40px 20px;
+}
+
+.dashboard-container {
+  width: 100%;
+  max-width: 1100px;
+  text-align: center;
+}
+
+.dashboard-header {
+  margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin-bottom: 10px;
+}
+
+.dashboard-header p {
+  font-size: 1.1rem;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.subject-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.subject-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Simple placeholder icons */
+.book-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23007bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'%3E%3C/path%3E%3Cpath d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'%3E%3C/path%3E%3C/svg%3E");
+}
+.shield-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23007bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3C/svg%3E");
+}
+.chart-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23007bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3v18h18'%3E%3C/path%3E%3Cpath d='M18.7 8a2 2 0 0 1 0 2.8l-6 6a2 2 0 0 1-2.8 0l-4-4a2 2 0 0 1 0-2.8l6-6a2 2 0 0 1 2.8 0z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+
+.subject-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #343a40;
+  margin-bottom: 10px;
+}
+
+.subject-card p {
+  font-size: 0.95rem;
+  color: #6c757d;
+  line-height: 1.6;
+  flex-grow: 1; /* Pushes button to the bottom */
+  margin-bottom: 25px;
+}
+
+.start-btn {
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.start-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.start-btn:disabled {
+  background-color: #a9cce3;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.subject-card.disabled {
+  opacity: 0.7;
+}
+
+.subject-card.disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}

@@ -1,0 +1,19 @@
+<div class="subject-container">
+  <header class="subject-header">
+    <button class="back-btn" (click)="goBack()">← Back to Dashboard</button>
+    <!-- Display the full subject title using the subjectTitles map -->
+    <h1>{{ subjectTitles[subject] }}</h1>
+    <p>Choose a mock test to begin your preparation.</p>
+  </header>
+
+  <main class="mocks-grid">
+    <!-- Loop through the generated mocks and create a card for each -->
+    <div class="mock-card" (click)="navigateToMock(mock)" *ngFor="let mock of mocks; let i = index">
+      <div class="card-content">
+        <span class="mock-number">{{ i + 1 }}</span>
+        <h3 class="mock-title">{{ mock }}</h3>
+      </div>
+      <span class="start-arrow">→</span>
+    </div>
+  </main>
+</div>

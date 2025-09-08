@@ -1,0 +1,167 @@
+<!-- mock.component.html -->
+<div class="quiz-container">
+  <!-- Quiz View -->
+  <div *ngIf="!quizFinished && questions.length > 0">
+    
+    <!-- Header with Back Button -->
+    <div class="quiz-top-header">
+      <button class="back-btn" (click)="goBack()">← Back</button>
+      <button class="edit-btn" (click)="openEditPopup()">✏️ Edit</button>
+    </div>
+
+    <!-- Question Navigator Section -->
+    <div class="navigator-section">
+      <button (click)="toggleNavigator()" class="toggle-nav-btn">
+        Question Navigator ☰
+      </button>
+      <div class="navigator-container" [class.expanded]="isNavigatorVisible">
+        <button
+          *ngFor="let q of questions; let i = index"
+          [ngClass]="getNavigatorButtonClass(i)"
+          (click)="jumpToQuestion(i)">
+          {{ i + 1 }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Question Number -->
+    <div class="quiz-header">
+      <h2 class="question-number">Question {{ currentQuestionIndex + 1 }} / {{ questions.length }}</h2>
+    </div>
+
+    <!-- Question Text -->
+    <div class="question-text">
+      <p>{{ currentQuestion.question }}</p>
+    </div>
+
+    <!-- Options Container -->
+    <div class="options-container">
+      <div
+        *ngFor="let option of currentQuestion.options"
+        [ngClass]="getOptionClass(option.id)"
+        (click)="selectOption(option.id)">
+        {{ option.text }}
+      </div>
+    </div>
+
+    <!-- Explanation (shown after answering) -->
+    <div *ngIf="isAnswered && currentQuestion.explanation" class="explanation">
+      <strong>Explanation:</strong> {{ currentQuestion.explanation }}
+    </div>
+
+    <!-- Next Button (shown after answering) -->
+    <div class="controls">
+      <button *ngIf="isAnswered" (click)="nextQuestion()" class="next-btn">
+        {{ currentQuestionIndex < questions.length - 1 ? 'Next Question' : 'Finish Quiz' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Results View -->
+  <div *ngIf="quizFinished" class="results-container">
+    <h2 class="results-title">Quiz Completed! 🏆</h2>
+    <p class="results-score">
+      You scored <strong>{{ score }}</strong> out of <strong>{{ questions.length }}</strong>
+    </p>
+    <button (click)="restartQuiz()" class="restart-btn">Try Again</button>
+    <button (click)="goBack()" class="back-to-dash-btn">Back to Dashboard</button>
+  </div>
+</div>
+
+<!-- Edit Popup Modal -->
+<div *ngIf="isEditPopupVisible" class="modal-overlay" (click)="closeEditPopup()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Edit Question</h3>
+      <button class="close-btn" (click)="closeEditPopup()">×</button>
+    </div>
+    
+    <div class="modal-body" *ngIf="editableQuestion">
+      <!-- Question ID -->
+      <div class="form-group">
+        <label for="questionId">Question ID:</label>
+        <input
+          type="text"
+          id="questionId"
+          [(ngModel)]="editableQuestion.questionId"
+          class="form-input">
+      </div>
+
+      <!-- Question Text -->
+      <div class="form-group">
+        <label for="questionText">Question:</label>
+        <textarea
+          id="questionText"
+          [(ngModel)]="editableQuestion.question"
+          class="form-textarea"
+          rows="3"></textarea>
+      </div>
+
+      <!-- Options -->
+      <div class="form-group">
+        <label>Options:</label>
+        <div *ngFor="let option of editableQuestion.options; let i = index" class="option-group">
+          <div class="option-input-group">
+            <input
+              type="text"
+              placeholder="Option ID"
+              [(ngModel)]="option.id"
+              class="form-input option-id">
+            <input
+              type="text"
+              placeholder="Option Text"
+              [(ngModel)]="option.text"
+              class="form-input option-text">
+            <button
+              *ngIf="editableQuestion.options.length > 2"
+              class="remove-option-btn"
+              (click)="removeOption(i)">
+              🗑️
+            </button>
+          </div>
+        </div>
+        <button
+          *ngIf="editableQuestion.options.length < 6"
+          class="add-option-btn"
+          (click)="addOption()">
+          + Add Option
+        </button>
+      </div>
+
+      <!-- Correct Option -->
+      <div class="form-group">
+        <label for="correctOption">Correct Option ID:</label>
+        <select
+          id="correctOption"
+          [(ngModel)]="editableQuestion.correctOption"
+          class="form-select">
+          <option *ngFor="let option of editableQuestion.options" [value]="option.id">
+            {{ option.id }} - {{ option.text }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Explanation -->
+      <div class="form-group">
+        <label for="explanation">Explanation:</label>
+        <textarea
+          id="explanation"
+          [(ngModel)]="editableQuestion.explanation"
+          class="form-textarea"
+          rows="2"
+          placeholder="Optional explanation"></textarea>
+      </div>
+
+      <!-- JSON Preview -->
+      <div class="form-group">
+        <label>Preview (JSON):</label>
+        <pre class="json-preview">{{ editableQuestion | json }}</pre>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="closeEditPopup()">Cancel</button>
+      <button class="submit-btn" (click)="submitEdit()">Submit Changes</button>
+    </div>
+  </div>
+</div>
