@@ -51,7 +51,7 @@ export class MockComponent implements OnInit {
     });
 
     // Call the service to get the questions from the API
-    this.quizService.getQuestions().subscribe({
+    this.quizService.getQuestionsByKey(this.mockKey).subscribe({
       next: (questions: any) => {
         this.questions = questions;
         if (this.questions.length === 0) {
