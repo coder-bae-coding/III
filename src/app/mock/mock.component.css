@@ -11,6 +11,7 @@
   padding: 20px;
 }
 
+
 .quiz-container {
   width: 100%;
   max-width: 700px;
@@ -99,8 +100,13 @@
 }
 
 .navigator-container.expanded {
-  max-height: 400px;
+  max-height: fit-content;
   opacity: 1;
+  padding-top:10px;
+  display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 .nav-btn {
